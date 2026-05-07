@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>罗涵篇 ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -15,79 +18,129 @@ box-sizing:border-box;
 body{
 height:100vh;
 overflow:hidden;
-font-family:sans-serif;
-background:#090909;
+font-family:'Noto Sans SC',sans-serif;
+background:#0b0f1a;
 color:white;
+position:relative;
 }
 
-/* 背景 */
+/* 星空背景 */
+
 #bg{
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at top,#1d2330,#090909 70%);
-transition:1s;
+linear-gradient(to bottom,#10192e,#090b11);
+overflow:hidden;
 }
 
-/* 星空 */
 .star{
 position:absolute;
-width:2px;
-height:2px;
 background:white;
 border-radius:50%;
-animation: twinkle 2s infinite;
+opacity:.7;
+animation: twinkle 3s infinite;
 }
 
 @keyframes twinkle{
-0%,100%{opacity:.2}
-50%{opacity:1}
+0%,100%{opacity:.2;}
+50%{opacity:1;}
 }
 
-/* 对话框 */
+/* 月亮 */
+
+#moon{
+position:absolute;
+top:70px;
+right:90px;
+width:120px;
+height:120px;
+background:#fff5d9;
+border-radius:50%;
+box-shadow:0 0 60px rgba(255,255,255,.4);
+}
+
+/* 标题 */
+
+#title{
+position:absolute;
+top:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:28px;
+letter-spacing:6px;
+opacity:.9;
+font-family:'ZCOOL KuaiLe',cursive;
+}
+
+/* 对话区域 */
+
 #dialog{
 position:absolute;
-left:50%;
 bottom:40px;
+left:50%;
 transform:translateX(-50%);
-width:85%;
-background:rgba(255,255,255,0.08);
-backdrop-filter: blur(10px);
-border-radius:24px;
-padding:26px;
-box-shadow:0 10px 40px rgba(0,0,0,.5);
+width:90%;
+max-width:900px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(16px);
+border-radius:30px;
+padding:30px;
+box-shadow:0 10px 40px rgba(0,0,0,.4);
+animation: showUp 1s;
 }
+
+@keyframes showUp{
+from{
+opacity:0;
+transform:translateX(-50%) translateY(40px);
+}
+}
+
+/* 名字 */
 
 #name{
 font-size:18px;
 opacity:.7;
-margin-bottom:10px;
+margin-bottom:14px;
 }
 
+/* 文本 */
+
 #text{
-font-size:30px;
-line-height:1.7;
-min-height:120px;
+font-size:34px;
+line-height:1.8;
+min-height:160px;
+font-weight:600;
 animation: fade .6s;
 }
 
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+}
+
 /* 按钮 */
+
 #choices{
-margin-top:20px;
+margin-top:25px;
 display:flex;
-gap:15px;
+gap:16px;
 flex-wrap:wrap;
 }
 
 .choice{
-padding:12px 24px;
 border:none;
+padding:14px 28px;
 border-radius:999px;
+font-size:17px;
 background:rgba(255,255,255,.12);
 color:white;
-font-size:16px;
-transition:.3s;
 cursor:pointer;
+transition:.35s;
+backdrop-filter:blur(8px);
 }
 
 .choice:hover{
@@ -95,38 +148,64 @@ transform:scale(1.08);
 background:rgba(255,255,255,.2);
 }
 
-/* 小猫 */
-#cat{
-position:fixed;
-right:20px;
-bottom:220px;
-font-size:60px;
-animation: float 2s infinite;
+/* 人物 */
+
+.character{
+position:absolute;
+bottom:230px;
+width:240px;
+transition:1s;
+user-select:none;
+}
+
+#girl{
+right:60px;
+animation: float 3s infinite;
+}
+
+#boy{
+left:60px;
+animation: float 3s infinite .8s;
 }
 
 @keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-8px)}
-100%{transform:translateY(0)}
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
 }
 
-/* 标题 */
-#tip{
-position:fixed;
-top:40px;
-left:50%;
-transform:translateX(-50%);
-font-size:18px;
-opacity:.6;
-letter-spacing:3px;
+/* 气泡 */
+
+.bubble{
+position:absolute;
+background:white;
+color:#222;
+padding:10px 16px;
+border-radius:18px;
+font-size:15px;
+top:-20px;
+right:0;
+animation: bubble .5s;
+}
+
+@keyframes bubble{
+from{
+opacity:0;
+transform:translateY(10px);
+}
 }
 
 /* 爱心 */
+
 .heart{
 position:fixed;
-color:#ff4d6d;
-font-size:20px;
-animation:fall linear forwards;
+top:-20px;
+color:#ff5c8a;
+animation: fall linear forwards;
+pointer-events:none;
 }
 
 @keyframes fall{
@@ -136,15 +215,73 @@ opacity:0;
 }
 }
 
-.fade{
-animation: fade .6s;
+/* 微信聊天 */
+
+.chat{
+display:flex;
+margin:14px 0;
+animation: fade .5s;
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(15px);
+.chat.left{
+justify-content:flex-start;
 }
+
+.chat.right{
+justify-content:flex-end;
+}
+
+.msg{
+max-width:70%;
+padding:14px 18px;
+border-radius:18px;
+font-size:20px;
+line-height:1.6;
+}
+
+.left .msg{
+background:white;
+color:#111;
+border-top-left-radius:6px;
+}
+
+.right .msg{
+background:#95ec69;
+color:#111;
+border-top-right-radius:6px;
+}
+
+/* 小猫 */
+
+#cat{
+position:absolute;
+right:20px;
+bottom:180px;
+font-size:70px;
+animation: float 2s infinite;
+}
+
+#catText{
+position:absolute;
+right:90px;
+bottom:260px;
+background:rgba(255,255,255,.14);
+padding:10px 14px;
+border-radius:16px;
+font-size:14px;
+opacity:0;
+transition:.4s;
+}
+
+/* 转场 */
+
+.flash{
+animation: flash .8s;
+}
+
+@keyframes flash{
+0%{opacity:0;}
+100%{opacity:1;}
 }
 
 </style>
@@ -152,174 +289,306 @@ transform:translateY(15px);
 
 <body>
 
-<div id="bg"></div>
-<div id="tip">《 罗涵篇 》</div>
+<div id="bg">
+<div id="moon"></div>
+</div>
+
+<div id="title">《 罗涵篇 》</div>
+
+<div id="boy" class="character">🧑🏻</div>
+<div id="girl" class="character">👧🏻</div>
+
 <div id="cat">🐱</div>
+<div id="catText"></div>
 
 <div id="dialog">
-<div id="name">故事开始了</div>
-<div id="text">点一下，故事开始。</div>
+
+<div id="name">旁白</div>
+
+<div id="text">
+点一下，故事开始。
+</div>
+
 <div id="choices"></div>
+
 </div>
 
 <script>
 
-// ⭐ 星空
-for(let i=0;i<90;i++){
+/* ⭐ 星空 */
+
+for(let i=0;i<120;i++){
+
 const s=document.createElement('div');
+
 s.className='star';
+
+let size=Math.random()*3;
+
+s.style.width=size+'px';
+s.style.height=size+'px';
+
 s.style.left=Math.random()*100+'vw';
 s.style.top=Math.random()*100+'vh';
-s.style.animationDelay=Math.random()*2+'s';
-document.body.appendChild(s);
+
+s.style.animationDelay=Math.random()*3+'s';
+
+document.getElementById('bg').appendChild(s);
+
 }
 
-// ❤️ 爱心
-setInterval(()=>{
-const h=document.createElement('div');
-h.className='heart';
-h.innerText='❤';
-h.style.left=Math.random()*100+'vw';
-h.style.top='-20px';
-h.style.animationDuration=(4+Math.random()*4)+'s';
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),8000);
-},800);
+/* ❤️ 爱心 */
 
-const text=document.getElementById('text');
-const nameEl=document.getElementById('name');
-const choices=document.getElementById('choices');
+setInterval(()=>{
+
+const h=document.createElement('div');
+
+h.className='heart';
+
+h.innerText='❤';
+
+h.style.left=Math.random()*100+'vw';
+
+h.style.fontSize=(12+Math.random()*20)+'px';
+
+h.style.animationDuration=(4+Math.random()*4)+'s';
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),8000);
+
+},700);
+
+/* 小猫 */
+
+const catLines=[
+"他真的很紧张欸～",
+"我觉得你们超配。",
+"有人已经开始心动了。",
+"别装啦我都看出来了。",
+"今天也是喜欢她的一天。"
+];
+
+function catSay(){
+
+const el=document.getElementById('catText');
+
+el.innerText=catLines[Math.floor(Math.random()*catLines.length)];
+
+el.style.opacity=1;
+
+setTimeout(()=>{
+el.style.opacity=0;
+},2500);
+
+}
+
+setInterval(catSay,5000);
+
+/* 剧情 */
+
+const story=[
+
+{
+name:"旁白",
+text:"有时候我会觉得，缘分真的很奇怪。"
+},
+
+{
+name:"旁白",
+text:"原本只是聊天软件里很普通的一句“你好”。"
+},
+
+{
+name:"我",
+text:"但不知道为什么，和你聊天的时候，总感觉时间过得特别快。"
+},
+
+{
+name:"👧🏻 你",
+text:"可能因为你话太多了。"
+},
+
+{
+name:"🐱 小猫",
+text:"其实她聊得也很开心啦。"
+},
+
+{
+name:"旁白",
+text:"后来到了五一，我们终于决定见面。"
+},
+
+{
+name:"旁白",
+text:"那天风有点大。"
+},
+
+{
+name:"旁白",
+text:"可我还是一眼就看见了你。"
+},
+
+{
+name:"旁白",
+text:"然后我们一起去了桌游店。"
+},
+
+{
+name:"我",
+text:"其实那时候我有点紧张。",
+choices:["怕冷场","怕你觉得我无聊","但还是特别开心"]
+},
+
+{
+name:"👧🏻 你",
+text:"其实我也有一点点。"
+},
+
+{
+name:"旁白",
+text:"后来我们又一起喝酒喝到了凌晨。"
+},
+
+{
+name:"旁白",
+text:"街边灯光很亮。"
+},
+
+{
+name:"旁白",
+text:"明明才刚认识。"
+},
+
+{
+name:"旁白",
+text:"却像已经认识了很久。"
+},
+
+{
+name:"🐱 小猫",
+text:"微醺的时候最容易心动啦。"
+},
+
+{
+name:"旁白",
+text:"第二天，我们去了欢乐谷。"
+},
+
+{
+name:"👧🏻 你",
+text:"我那天真的玩得特别开心。"
+},
+
+{
+name:"我",
+text:"而我已经快晕过去了。"
+},
+
+{
+name:"🐱 小猫",
+text:"他都快碎掉了还在陪你玩。"
+},
+
+{
+name:"旁白",
+text:"第三天，我们一起去洗了脚。"
+},
+
+{
+name:"旁白",
+text:"后来我还偷偷给你带了花。"
+},
+
+{
+name:"我",
+text:"其实递花的时候，我比想象中还紧张。"
+},
+
+{
+name:"👧🏻 你",
+text:"但我很喜欢。"
+},
+
+{
+name:"旁白",
+text:"最后，我们一起去了KTV。"
+},
+
+{
+name:"旁白",
+text:"灯光有点暗。"
+},
+
+{
+name:"旁白",
+text:"歌声也很温柔。"
+},
+
+{
+name:"我",
+text:"那时候我就在想。"
+},
+
+{
+name:"我",
+text:"以后是不是还能继续陪你一起玩。",
+choices:["当然可以","那要看你表现","笨蛋，当然可以"]
+},
+
+{
+name:"🐱 小猫",
+text:"有人已经彻底沦陷了。"
+},
+
+{
+name:"旁白",
+text:"其实有些话，我一直没太敢说。"
+},
+
+{
+name:"我",
+text:"但我真的很开心，能遇见你。"
+},
+
+{
+name:"我",
+text:"❤️"
+}
+
+];
 
 let step=0;
 
-const story=[
-{
-name:'旁白',
-text:'有时候我会觉得，缘分真的很奇怪。'
-},
-{
-name:'旁白',
-text:'原本只是聊天软件里很普通的一次对话。'
-},
-{
-name:'我',
-text:'但不知道为什么，和你聊天的时候，总感觉时间过得特别快。'
-},
-{
-name:'🐱 小猫',
-text:'有人已经偷偷上头了喔～'
-},
-{
-name:'旁白',
-text:'后来到了五一，我们终于决定见面。'
-},
-{
-name:'旁白',
-text:'那天的风有点大，但我记得你笑起来很好看。'
-},
-{
-name:'旁白',
-text:'我们一起去了桌游店。'
-},
-{
-name:'我',
-text:'其实那时候我有点紧张。',
-choices:['怕冷场','怕你觉得我无聊','但还是很开心']
-},
-{
-name:'旁白',
-text:'后来又一起喝酒喝到了凌晨。'
-},
-{
-name:'旁白',
-text:'明明才刚认识，却像认识了很久。'
-},
-{
-name:'🐱 小猫',
-text:'微醺 + 心动 = 完蛋啦。'
-},
-{
-name:'旁白',
-text:'第二天，我们去了欢乐谷。'
-},
-{
-name:'旁白',
-text:'你玩得特别开心。'
-},
-{
-name:'我',
-text:'而我已经快晕过去了。'
-},
-{
-name:'🐱 小猫',
-text:'他都快碎掉了还在陪你玩。'
-},
-{
-name:'旁白',
-text:'第三天，我们去洗了脚。'
-},
-{
-name:'旁白',
-text:'后来我还给你带了花。'
-},
-{
-name:'我',
-text:'其实送花的时候，我比想象中紧张很多。'
-},
-{
-name:'旁白',
-text:'最后，我们一起去了KTV。'
-},
-{
-name:'旁白',
-text:'灯光有点暗，歌声有点温柔。'
-},
-{
-name:'我',
-text:'那时候我就在想。'
-},
-{
-name:'我',
-text:'以后是不是还能继续陪你一起玩。',
-choices:['当然可以','看你表现','那要加油喔']
-},
-{
-name:'🐱 小猫',
-text:'他真的很认真欸。'
-},
-{
-name:'旁白',
-text:'其实有些话，我一直没太敢说。'
-},
-{
-name:'我',
-text:'但我真的很开心，能遇见你。'
-},
-{
-name:'我',
-text:'❤️'
-}
-];
+const nameEl=document.getElementById('name');
+const textEl=document.getElementById('text');
+const choicesEl=document.getElementById('choices');
 
 function render(){
 
-choices.innerHTML='';
+choicesEl.innerHTML='';
 
 if(step>=story.length){
-nameEl.innerText='故事结束';
-text.innerHTML='未完待续… ❤️';
+
+nameEl.innerText="故事结束";
+
+textEl.innerHTML="未完待续… ❤️";
+
 return;
+
 }
 
 const s=story[step];
 
 nameEl.innerText=s.name;
 
-text.classList.remove('fade');
-void text.offsetWidth;
-text.classList.add('fade');
+textEl.classList.remove('flash');
 
-text.innerText=s.text;
+void textEl.offsetWidth;
+
+textEl.classList.add('flash');
+
+textEl.innerText=s.text;
 
 if(s.choices){
 
@@ -332,11 +601,14 @@ btn.className='choice';
 btn.innerText=c;
 
 btn.onclick=()=>{
+
 step++;
+
 render();
+
 };
 
-choices.appendChild(btn);
+choicesEl.appendChild(btn);
 
 });
 
@@ -349,11 +621,14 @@ btn.className='choice';
 btn.innerText='继续';
 
 btn.onclick=()=>{
+
 step++;
+
 render();
+
 };
 
-choices.appendChild(btn);
+choicesEl.appendChild(btn);
 
 }
 
